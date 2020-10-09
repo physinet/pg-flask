@@ -1,0 +1,7 @@
+flask
+flask-sqlalchemy
+gunicorn
+matplotlib
+psycopg2
+sqlalchemy
+setuptools

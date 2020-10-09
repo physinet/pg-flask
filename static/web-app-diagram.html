@@ -1,0 +1,76 @@
+
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+ <div class="mermaid ">
+   stateDiagram-v2
+
+    state default_endpoint{
+
+         main1: Query vote counts from database
+         main2: render_template('index.html')
+
+         [*]-->main1
+         main1-->main2
+         main2-->[*]
+      }
+
+    state templates/index.html {
+
+        j: Use Jinja2 to populate fields
+        i: Render HTML
+        form: Submit form
+
+        [*] --> j
+        j --> i
+        i --> form
+        form --> [*]
+      }
+
+    state add{
+
+       a1: Get vote from form submission
+       a2: Create data model
+       a3: Commit to database
+       a4: redirect('/')
+
+       [*] --> a1
+       a1 --> a2
+       a2 --> a3
+       a3 --> a4
+       a4-->[*]
+      }
+
+      pg: PostgreSQL Database
+        note right of pg
+            Either the local or remote (hosted on Heroku) database,
+            depending on app configuration specified in config.py.
+        end note
+
+     %% EDGES
+      default_endpoint --> templates/index.html
+      templates/index.html --> add
+      add --> pg
+      pg --> default_endpoint
+   </div>
+
+
+     <script type="text/javascript">
+        var config = {
+          startOnLoad:true,
+          securityLevel:'loose'
+        };
+        mermaid.initialize(config);
+     </script>
+  </body>
+</html>

@@ -1,0 +1,11 @@
+name: app
+channels:
+  - conda-forge
+dependencies:
+  - flask
+  - flask-sqlalchemy
+  - gunicorn
+  - matplotlib
+  - psycopg2
+  - setuptools
+  - sqlalchemy

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+ <div>
+   <div style="display: flex;">
+ <div class="mermaid ">
+   graph TD
+
+     a(app.py)
+     cn(config.py)
+     cm(commands.py)
+     d(database.py)
+     m(model.py)
+
+     e(.env  / heroku)
+       style e stroke-dasharray: 5 5
+
+     e -- "os.environ.get('APP_SETTINGS')" ----> a
+     e --> cn
+     cn -- "app.config()" --> a
+
+     d -- import db --> a & m & cm
+     m -- import model --> a & cm
+     cm -- import init_app --> a
+
+     click a fillDesc
+   </div>
+       <div class="my-5 mx-5" style="flex: 1; background-color: green; opacity: 1;">
+           Description of <span id='appname'> </span>
+           <div id="desc">
+
+           </div>
+      </div>
+ </div>
+
+     <script type="text/javascript">
+        var fillDesc = function() {
+          box = document.getElementById('appname');
+          box.textContent = 'app.py';
+
+          desc = document.getElementById('desc');
+          desc.textContent = 'app.py description....'
+        };
+        var config = {
+          startOnLoad:true,
+          securityLevel:'loose',
+        };
+        mermaid.initialize(config);
+     </script>
+  </body>
+</html>
