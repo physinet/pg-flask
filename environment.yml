@@ -2,10 +2,12 @@ name: app
 channels:
   - conda-forge
 dependencies:
+  - altair
   - flask
   - flask-sqlalchemy
   - gunicorn
   - matplotlib
   - psycopg2
+  - python-dotenv
   - setuptools
   - sqlalchemy

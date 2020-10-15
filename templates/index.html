@@ -5,6 +5,9 @@
         <title>Cleo v.s. Pita</title>
     </head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega@5"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-lite@4.8.1"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-embed@6"></script>
 <body>
     <div class="row d-flex justify-content-center mt-md-5">
         <h1>VOTE - IT'S YOUR CIVIC DUTY</h1>
@@ -40,5 +43,19 @@
                 </div>
             </div>
         </div>
+        <div id='vis'></div>
+
+        <div id='vis2'></div>
+
+
+      <script>
+      var spec = {{chart| safe}};
+      vegaEmbed("#vis", spec);
+      </script>
+
+      <script>
+      var spec2 = 'static/chart.json';
+      vegaEmbed("#vis2", spec2);
+      </script>
 </body>
 </html>

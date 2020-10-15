@@ -1,6 +1,9 @@
+import json
 import os
 from flask import Flask, jsonify, render_template, request, redirect
 from sqlalchemy import func
+
+import altair as alt
 
 import commands
 import database
@@ -12,6 +15,7 @@ app = Flask(__name__)
 
 # setup with the configuration provided by the user / environment
 app.config.from_object(os.environ['APP_SETTINGS'])
+
 
 database.init_app(app)
 commands.init_app(app)
@@ -25,10 +29,25 @@ def main_page():
                  .group_by(Model.vote)
                  .all())
 
+
+
+    chart_data = alt.Data(values=[{'name':'Pita', 'votes':votes['Pita']},
+                  {'name': 'Gummi', 'votes': votes['Gummi']}])
+
+
+    chart = (alt.Chart(chart_data)
+                .properties(width=150,
+                            height=150)
+                .mark_bar()
+                .encode(alt.X('name', type='nominal'),
+                        alt.Y('votes', type='quantitative')))
+
+
+    chart.save('static/chart.json')
     payload = {
         'gummi_votes': votes['Gummi'],
-        'pita_votes': votes['Pita']}
-
+        'pita_votes': votes['Pita'],
+        'chart':chart.to_json()}
     return render_template('index.html', **payload)
 
 

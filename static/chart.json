@@ -1,0 +1,1 @@
+{"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"values": [{"name": "Pita", "votes": 25}, {"name": "Gummi", "votes": 3}]}, "mark": "bar", "encoding": {"x": {"type": "nominal", "field": "name"}, "y": {"type": "quantitative", "field": "votes"}}, "height": 150, "width": 150, "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json"}

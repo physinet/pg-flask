@@ -1,7 +1,9 @@
+altair
 flask
 flask-sqlalchemy
 gunicorn
 matplotlib
 psycopg2
+python-dotenv
 sqlalchemy
 setuptools
