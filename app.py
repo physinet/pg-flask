@@ -32,7 +32,7 @@ def main_page():
 
 
     chart_data = alt.Data(values=[{'name':'Pita', 'votes':votes.get('Pita', 0)},
-                  {'name': 'Gummi', 'votes': votes.get('Pita', 0)}])
+                  {'name': 'Gummi', 'votes': votes.get('Gummi', 0)}])
 
 
     chart = (alt.Chart(chart_data)
