@@ -31,8 +31,8 @@ def main_page():
 
 
 
-    chart_data = alt.Data(values=[{'name':'Pita', 'votes':votes['Pita']},
-                  {'name': 'Gummi', 'votes': votes['Gummi']}])
+    chart_data = alt.Data(values=[{'name':'Pita', 'votes':votes.get('Pita', 0)},
+                  {'name': 'Gummi', 'votes': votes.get('Pita', 0)}])
 
 
     chart = (alt.Chart(chart_data)
@@ -45,8 +45,8 @@ def main_page():
 
     chart.save('static/chart.json')
     payload = {
-        'gummi_votes': votes['Gummi'],
-        'pita_votes': votes['Pita'],
+        'gummi_votes': votes.get('Gummi', 0),
+        'pita_votes': votes.get('Pita', 0),
         'chart':chart.to_json()}
     return render_template('index.html', **payload)
 
