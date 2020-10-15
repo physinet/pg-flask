@@ -43,7 +43,7 @@ def main_page():
                         alt.Y('votes', type='quantitative')))
 
 
-    chart.save('static/chart.json')
+    chart.save('chart.json')
     payload = {
         'gummi_votes': votes.get('Gummi', 0),
         'pita_votes': votes.get('Pita', 0),
