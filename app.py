@@ -6,6 +6,7 @@ import commands
 import database
 from model import Model
 
+from collections import defaultdict
 
 # init flask app instance
 app = Flask(__name__)
@@ -19,11 +20,11 @@ commands.init_app(app)
 
 @app.route("/")
 def main_page():
-    votes = dict(Model
-                 .query
-                 .with_entities(Model.vote, func.count(Model.vote))
-                 .group_by(Model.vote)
-                 .all())
+    votes = defaultdict(int, Model
+                        .query
+                        .with_entities(Model.vote, func.count(Model.vote))
+                        .group_by(Model.vote)
+                        .all())
 
     payload = {
         'gummi_votes': votes['Gummi'],
