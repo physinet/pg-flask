@@ -1,7 +1,7 @@
 # Demo: Flask with PostgreSQL on Heroku
 Somewhere between a tutorial and an anatomy of a simple Flask app with PostgreSQL and Heroku.
 
-We're doing important work here... enabling users to vote for their favorite of these two pictures: 
+We're doing important work here... enabling users to vote for their favorite of these two pictures:
 <div>
  <img height=320px src='https://pita-cleo.s3.us-east-2.amazonaws.com/IMG_4586.JPG'><img height=320px src="https://pita-cleo.s3.us-east-2.amazonaws.com/IMG_2090.jpeg">
  </div>
@@ -13,6 +13,7 @@ While the resulting application is different, the structure of this project is a
 Ultimately, the hope for this repository is to demonstrate/visualize the relationships between the different components of this Flask app.
 
 <!--ts-->
+  * [Quickstart guide](#quickstart-guide)
   * [Flask app structure](#flask-app-structure)
      * [Configuration files:](#configuration-files)
         * [config.py](#configpy)
@@ -28,6 +29,14 @@ Ultimately, the hope for this repository is to demonstrate/visualize the relatio
      * [Home page HTML](#home-page-html)
      * [The '/add' endpoint](#the-add-endpoint)
 <!--te-->
+
+## Quickstart guide
+
+1. Clone this repository (`git clone https://github.com/mcullan/pg-flask`)
+1. Install [PostgreSQL](https://www.postgresql.org/download/) and create a database
+1. Set up a `.env` file [(jump to section)](#env--heroku-config-vars)
+1. Navigate to the root directory of this repository. Set the environment variable using `export FLASK_APP=app.py` (Unix) or `set FLASK_APP=app.py` (Windows). Then, run `flask db_create_all` to create empty tables in our database. Finally, run `flask run` to start the app.
+1. In a web browser, navigate to `localhost:5000` to see the website up and running!
 
 ## Flask app structure
 Our Flask app is constructed from a number of interconnecting scripts. The diagram below shows (roughly) how they interact.
@@ -52,13 +61,13 @@ We don't want to expose the endpoint for our database, so we're going to save
 the URL in a shell environment variable called DATABASE_URL. We could do this manually by running `export DATABASE_URL=<url here>`, but instead we're going to save these variables somewhere our app knows how to access them.
 
 * On our local machine, create a text file named `.env`. **Make sure that this file is listed in your .gitignore.** If you're using the standard Python `.gitignore`, it will be listed. As a result, `.env` won't be tracked in your repository, and your secrets will be safe with you.
-* Write to `.env` like you see below, replacing `<url here>` with the actual URL for your database. It probably looks something like `postgres://admin@localhost:password@dbflask`, but generally, it has the form `postgres://<user>@<host>:<password>@<database_name>`.
+* Write to `.env` like you see below, replacing `<url here>` with the actual URL for your database. It probably looks something like `postgres://admin:password@localhost:5432/dbflask`, but generally, it has the form `postgres://<username>:<password>@<host>:<port>/<database_name>`.
 ```
-APPLICATION_SETTINGS=config.DevelopmentConfig(base)
+APP_SETTINGS=config.DevelopmentConfig
 DATABASE_URL= <url here>
 ```
 Now, when you `flask run` or `heroku local web` on your own machine, the application will be able to use these values.
-1. `$APPLICATION_SETTINGS` is referenced in `app.py`, and is used to call the appropriate class from `config.py`. When we run locally, this means we use the class `DevelopmentConfig(base)`.
+1. `$APP_SETTINGS` is referenced in `app.py`, and is used to call the appropriate class from `config.py`. When we run locally, this means we use the class `DevelopmentConfig`.
 2. `DATABASE_URL` is referenced in `config.py`.
 
 **On Heroku, this will work a bit differently.**
