@@ -35,7 +35,11 @@ Ultimately, the hope for this repository is to demonstrate/visualize the relatio
 1. Clone this repository (`git clone https://github.com/mcullan/pg-flask`)
 1. Install [PostgreSQL](https://www.postgresql.org/download/) and create a database
 1. Set up a `.env` file [(jump to section)](#env--heroku-config-vars)
-1. Navigate to the root directory of this repository. Set the environment variable using `export FLASK_APP=app.py` (Unix) or `set FLASK_APP=app.py` (Windows). Then, run `flask db_create_all` to create empty tables in our database. Finally, run `flask run` to start the app.
+1. Navigate to the root directory of this repository. 
+    1. Install requirements using `pip install -r requirements.txt`
+    1. Set the environment variable using `export FLASK_APP=app.py` (Unix) or `set FLASK_APP=app.py` (Windows). 
+    1. Run `flask db_create_all` to create empty tables in our database.
+    1. Run `flask run` to start the app.
 1. In a web browser, navigate to `localhost:5000` to see the website up and running!
 
 ## Flask app structure
