@@ -13,7 +13,7 @@ While the resulting application is different, the structure of this project is a
 Ultimately, the hope for this repository is to demonstrate/visualize the relationships between the different components of this Flask app.
 
 <!--ts-->
-  * [Quickstart guide](#quickstart-guide)
+  * [Local quickstart guide](#local-quickstart-guide)
   * [Flask app structure](#flask-app-structure)
      * [Configuration files:](#configuration-files)
         * [config.py](#configpy)
@@ -30,7 +30,7 @@ Ultimately, the hope for this repository is to demonstrate/visualize the relatio
      * [The '/add' endpoint](#the-add-endpoint)
 <!--te-->
 
-## Quickstart guide
+## Local quickstart guide
 
 1. Clone this repository (`git clone https://github.com/mcullan/pg-flask`)
 1. Install [PostgreSQL](https://www.postgresql.org/download/) and create a database
@@ -38,7 +38,7 @@ Ultimately, the hope for this repository is to demonstrate/visualize the relatio
 1. Navigate to the root directory of this repository. 
     1. Install requirements using `pip install -r requirements.txt`
     1. Set the environment variable using `export FLASK_APP=app.py` (Unix) or `set FLASK_APP=app.py` (Windows). 
-    1. Run `flask db_create_all` to create empty tables in our database.
+    1. Run `flask db-create-all` to create empty tables in our database.
     1. Run `flask run` to start the app.
 1. In a web browser, navigate to `localhost:5000` to see the website up and running!
 
@@ -111,7 +111,7 @@ On the specification of the data model:
 #### `commands.py`
 Since our application combines multiple services, a web server and an external database, setting everything up gets a little more complicated. In this script, we define some Flask CLI commands for dealing with our database.
 
-Notably, we can use the command `flask db_create_all` to create all the tables currently described in our SQLAlchemy data model. Since `commands.py` imports from `model.py`, it has registered all data tables and the relationships between them. Similarly, since it imports `db` from database, it knows which PostgreSQL database it's working with.
+Notably, we can use the command `flask db-create-all` to create all the tables currently described in our SQLAlchemy data model. Since `commands.py` imports from `model.py`, it has registered all data tables and the relationships between them. Similarly, since it imports `db` from database, it knows which PostgreSQL database it's working with.
 
 If we didn't have this command, we would have to do one of the following things:
 1. Create the tables manually. This might mean opening an interactive Postgres shell with  `psql` (locally) or `heroku pg:psql` for our production app.
